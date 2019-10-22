@@ -2,7 +2,6 @@ defmodule WhiteBreadContext do
   use WhiteBread.Context
   use Hound.Helpers
 
-
   feature_starting_state fn  ->
     Application.ensure_all_started(:hound)
     %{}
@@ -55,6 +54,52 @@ defmodule WhiteBreadContext do
   end
 
   then_ ~r/^I should be back on the home page with an error message that reads "(?<message>[^"]+)"$/, fn state, %{message: message} ->
+    {:ok, state}
+  end
+
+  # --- Enrolling into courses --- #
+
+  given_ ~r/^I am logged in as a student$/, fn state ->
+    {:ok, state}
+  end
+
+  and_ ~r/^I visit the page of a course called "(?<course_name>[^"]+)"$/, fn state, %{course_name: name} ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the course does not depend on other courses$/, fn state ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the course depends on "(?<course_name>[^"]+)"$/, fn state, %{course_name: name} ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the capacity of the course is (?<cap>\d+)$/, fn state, %{cap: cap} ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the number of enrolled students is (?<count>\d+)$/, fn state, %{count: count} ->
+    {:ok, state}
+  end
+
+  when_ ~r/^I click on "(?<button_label>[^"]+)"$/, fn state, %{button_label: bt} ->
+    {:ok, state}
+  end
+
+  then_ ~r/^I should be enrolled in the course$/, fn state ->
+    {:ok, state}
+  end
+
+  then_ ~r/^I should see a message that reads, "(?<msg>[^"]+)"$/, fn state, %{msg: msg} ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the number of enrolled students should be (?<count>\d+)$/, fn state, %{count: count} ->
+    {:ok, state}
+  end
+
+  and_ ~r/^the "(?<button_name>[^"]+)" button should be disabled$/, fn state, %{button_name: bt} ->
     {:ok, state}
   end
 end

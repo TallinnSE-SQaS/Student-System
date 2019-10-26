@@ -1,0 +1,22 @@
+[
+    {
+        "user": "a.b",
+        "password": "passwordAB"
+    },
+    {
+        "user": "c.d",
+        "password": "passwordCD"
+    },
+    {
+        "user": "e.f",
+        "password": "passwordEF"
+    },
+    {
+        "user": "g.h",
+        "password": "passwordGH"
+    },
+    {
+        "user": "i.j",
+        "password": "passwordIJ"
+    }
+]

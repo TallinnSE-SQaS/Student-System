@@ -4,7 +4,7 @@
 </div>
 
 <div class="row marketing">
-  <div class="col-lg-6">
+  <div class="col-sm-6">
     <h4>Log in</h4>
     <form method="POST" action="">
       <div class="row">
@@ -24,7 +24,7 @@
     </form>
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-sm-6">
     <h4>The group</h4>
     <h5>TallinnSE</h5>
     <ul>

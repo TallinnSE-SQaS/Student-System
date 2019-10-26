@@ -35,8 +35,8 @@ defmodule WhiteBreadContext do
 
   and_ ~r/^I enter my login details into the login form$/, fn state ->
     [user_data|_] = state[:login_data]
-    fill_field(:username, user_data[:username])
-    fill_field(:password, user_data[:password])
+    fill_field({:id, "username"}, user_data[:username])
+    fill_field({:id, "password"}, user_data[:password])
     {:ok, state}
   end
 
@@ -45,7 +45,7 @@ defmodule WhiteBreadContext do
   end
 
   when_ ~r/^I submit the login form$/, fn state ->
-    click(:submit)
+    click({:id, "submit"})
     {:ok, state}
   end
 

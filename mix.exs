@@ -41,7 +41,7 @@ defmodule StudentSystem.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 1.0"},
-      {:white_bread, "~> 4.1.1", only: [:dev, :test]},
+      {:white_bread, "~> 4.5", only: [:dev, :test]},
       {:hound, "~> 1.0", only: [:dev, :test]}
     ]
   end

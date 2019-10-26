@@ -1,4 +1,7 @@
 
 
 def authentication(user,password):
-    return True
+    result = False
+    if (user == "user" and password == "goodPassword"):
+        result = True
+    return result

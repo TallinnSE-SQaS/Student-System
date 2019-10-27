@@ -31,6 +31,13 @@ server() {
     python main.py devserver
 }
 
+test() {
+    export PYTHONPATH=.env
+    export ENV=test
+
+    python -m unittest discover -v tests/
+}
+
 migrate() {
     export PYTHONPATH=.env
     python main.py migrate

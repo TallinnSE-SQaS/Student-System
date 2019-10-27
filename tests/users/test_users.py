@@ -10,4 +10,8 @@ class TestUsers(unittest.TestCase):
 
         self.assertIn(b'Student Homepage', response.data)
 
-        test_client.get('/users/logout', follow_redirects=True)
+    def test_login_with_invalid_credentials_should_show_error_message(self):
+        credentials = {'username': 'anything is good', 'password': "doesn't matter"}
+        response = test_client.post('/users/login', data=credentials, follow_redirects=True)
+
+        self.assertIn(b'Invalid credentials', response.data)

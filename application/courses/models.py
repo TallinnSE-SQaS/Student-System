@@ -20,3 +20,11 @@ class CourseEnrollment(BaseModel):
 
 
 CourseEnrollment.create_table()
+
+
+class CourseDependency(BaseModel):
+    dependant = peewee.ForeignKeyField(Course, backref='dependees')
+    dependee = peewee.ForeignKeyField(Course, backref='dependants')
+
+
+CourseDependency.create_table()

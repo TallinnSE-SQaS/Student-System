@@ -11,20 +11,17 @@ def login():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    cursor = User.select().where(User.username == username).execute()
+    select = User.select().where(User.username == username)
+    flash_msg = ('Invalid credentials.', 'error')
 
-    try:
-        u: User = cursor.iterate()
+    if select.count() != 0:
+        u: User = select.first()
 
         if u.password == password:
             session['current_user'] = {'id': u.pk, 'role': u.role}
-            flash('Welcome back!')
+            flash_msg = ('Welcome back!',)
 
-        else:
-            flash('Invalid credentials.', 'error')
-
-    except StopIteration:
-        flash('No such user.', 'error')
+    flash(*flash_msg)
 
     return redirect('/')
 

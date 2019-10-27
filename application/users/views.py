@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, session, flash, redirect
 
 from .models import User
+from application.courses.models import CourseEnrollment, Course
 
 
 users = Blueprint('users', __name__, url_prefix='/users')
@@ -34,7 +35,9 @@ def logout():
 
 
 def student_home():
-    return render_template('users/student_home.html.j2')
+    courses_enrolled_in = CourseEnrollment.select().where(
+        CourseEnrollment.student == session['current_user']['id'])
+    return render_template('users/student_home.html.j2', courses=enumerate(courses_enrolled_in))
 
 
 def professor_home():

@@ -1,6 +1,6 @@
 from application.app import app
 from application.users.models import User
-from application.courses.models import Course, CourseDependency
+from application.courses.models import Course, CourseDependency, CourseEnrollment
 
 
 database_data = {
@@ -11,7 +11,9 @@ database_data = {
              {"name": "Basic Course, filled out", "professor": 1, "capacity": 30, "student_count": 30},
              {"name": "Advanced Course", "professor": 1, "capacity": 30, "student_count": 20}],
 
-    CourseDependency: [{"dependant": 3, "dependee": 1}]
+    CourseDependency: [{"dependant": 3, "dependee": 1}],
+
+    CourseEnrollment: []
 }
 
 
@@ -21,7 +23,7 @@ def get_flask_test_client():
 
 
 def setup_database():
-    for model in (User, Course, CourseDependency):
+    for model in (User, Course, CourseDependency, CourseEnrollment):
         model.drop_table()
         model.create_table()
         model.bulk_create([

@@ -9,14 +9,15 @@
 #
 # You can call this script with one of these arguments:
 #
-# pip      -- installs dependencies into the .env directory. Necessary to specify what you want
-#             pip to do. A single argument ARG will make it try to install the dependency called
-#             ARG, if it exists. -r ARG will try to install the dependencies specified in the file
-#             ARG - usually requirements.txt.
-# code     -- launches VSCode with the required PYTHONPATH env var.
-# server   -- runs a development server on port 5000 (can be accessed on http://localhost:5000)
-# migrate  -- runs the migrations in the migrations directory (to be implemented).
-
+# pip       -- installs dependencies into the .env directory. Necessary to specify what you want
+#              pip to do. A single argument ARG will make it try to install the dependency called
+#              ARG, if it exists. -r ARG will try to install the dependencies specified in the file
+#              ARG - usually requirements.txt.
+# code      -- launches VSCode with the required PYTHONPATH env var.
+# server    -- runs a development server on port 5000 (can be accessed on http://localhost:5000)
+# test      -- runs automated tests
+# migrate   -- runs the migrations in the migrations directory (to be implemented).
+#              (not yet implemented)
 pip() {
     python -m pip install -t .env $*
 }

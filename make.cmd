@@ -16,7 +16,9 @@ SETLOCAL ENABLEEXTENSIONS
 ::             ARG - usually requirements.txt.
 :: code     -- launches VSCode with the required PYTHONPATH env var.
 :: server   -- runs a development server on port 5000 (can be accessed on http://localhost:5000)
+:: test     -- runs automated tests
 :: migrate  -- runs the migrations in the migrations directory (to be implemented).
+::             (not yet implemented)
 
 GOTO :main
 

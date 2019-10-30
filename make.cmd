@@ -40,7 +40,8 @@ GOTO :EOF
 SET PYTHONPATH=.env
 SET ENV=test
 
-START python -m unittest discover -v tests/
+python -m unittest discover -v tests/
+GOTO :EOF
 
 :migrate
 SET PYTHONPATH=.env

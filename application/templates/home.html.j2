@@ -1,0 +1,46 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">El Niño Student System</h1>
+      <p class="lead">A lightweight, user-friendly student system.<br/>Software Quality and Standards</p>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title">Login</h4>
+            <p class="card-text">
+                <form action="{{ url_for('users.login') }}" method="post">
+                    <p>Username <input name="username" type="text"></p>
+                    <p>Password <input name="password" type="password"></p>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="card h-100 ">
+          <div class="card-body">
+            <h4 class="card-title">Group members</h4>
+            <p class="card-text"><ul>
+                <li>Ahmed</li>
+                <li>Fabricio</li>
+                <li>Oluwandabira</li>
+                <li>Hông</li>
+            </ul></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row -->
+{% endblock content %}

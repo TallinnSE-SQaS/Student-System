@@ -36,6 +36,12 @@ SET PYTHONPATH=.env
 START python main.py devserver
 GOTO :EOF
 
+:test
+SET PYTHONPATH=.env
+SET ENV=test
+
+START python -m unittest discover -v tests/
+
 :migrate
 SET PYTHONPATH=.env
 python main.py migrate

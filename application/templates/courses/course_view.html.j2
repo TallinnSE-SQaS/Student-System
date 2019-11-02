@@ -1,0 +1,23 @@
+{% block content %}
+    <header class="jumbotron my-4">
+      <h1 class="display-3">El Niño Student System</h1>
+      <p class="lead">
+        {{ course.name }}<br/>
+        Capacity: {{ course.capacity }}<br/>
+        Student count: {{ course.student_count }}
+      </p>
+    </header>
+
+    {% if current_user %}
+      {% if is_enrolled %}
+        <div>You are enrolled in this course.</div>
+      {% else %}
+        <div>You can enroll in this course.</div>
+        <form action="{{ url_for('.course_enroll', id=course.pk) }}">
+          <button class="btn btn-primary" type="submit">Enroll</button>
+        </form>
+      {% endif %}
+    {% else %}
+      <div>Login to enroll in this course.</div>
+    {% endif %}
+{% endblock content %}

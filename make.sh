@@ -39,6 +39,13 @@ test() {
     python -m unittest discover -v tests/
 }
 
+bdd() {
+    export PYTHONPATH=.env
+    export ENV=test
+
+    python -m behave "$@"
+}
+
 migrate() {
     export PYTHONPATH=.env
     python main.py migrate

@@ -40,6 +40,7 @@ test() {
 }
 
 bdd() {
+    rm student-system.test.db
     export PYTHONPATH=.env
     export ENV=test
 

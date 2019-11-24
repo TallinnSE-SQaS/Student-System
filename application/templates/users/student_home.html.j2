@@ -7,28 +7,8 @@
     </header>
 
     <h2>My Courses</h2><br/>
-    {% for i, c in courses %}
+    {% include 'courses/includes/course_listing.html.j2' %}
 
-    {% if i % 4 == 0 %}
-    <div class="row text-center">
-    {% endif %}
-
-      <div class="col-lg-3 col-md-3 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title">{{ c.course.name }}</h4>
-            <p class="card-text">
-            </p>
-          </div>
-        </div>
-      </div>
-
-    {% if i % 4 == 3 %}
-    </div>
-    {% endif %}
-
-    {% endfor %}
-
-    <a href="#" class="btn btn-primary">Enroll into a new course</a>
+    <a href="{{ url_for('courses.home') }}" class="btn btn-primary">Enroll into a new course</a>
 
 {% endblock content %}

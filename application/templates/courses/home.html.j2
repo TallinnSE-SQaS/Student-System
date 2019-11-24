@@ -1,5 +1,10 @@
 {% extends "base.html.j2" %}
 
 {% block content %}
+    <header class="jumbotron my-4">
+      <h1 class="display-3">El Niño Student System</h1>
+      <p class="lead">Courses</p>
+    </header>
 
+    {% include "courses/includes/course_listing.html.j2" %}
 {% endblock content %}

@@ -1,0 +1,18 @@
+{% for c in courses %}
+    {% if loop.index0 % 4 == 0 %}
+      <div class="row text-center">
+    {% endif %}
+        <div class="col-lg-3 col-md-3 mb-4">
+            <a href="{{ url_for('courses.course_view', id=c.pk) }}">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ c.name }}</h4>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% if loop.index0 % 4 == 3 or loop.last %}
+        </div>
+    {% endif %}
+{% endfor %}

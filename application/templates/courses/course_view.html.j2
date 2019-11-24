@@ -1,8 +1,11 @@
+{% extends "base.html.j2" %}
+
 {% block content %}
     <header class="jumbotron my-4">
       <h1 class="display-3">El Niño Student System</h1>
       <p class="lead">
         {{ course.name }}<br/>
+        Lecturer: {{ course.professor.username }}<br/>
         Capacity: {{ course.capacity }}<br/>
         Student count: {{ course.student_count }}
       </p>
@@ -11,6 +14,10 @@
     {% if current_user %}
       {% if is_enrolled %}
         <div>You are enrolled in this course.</div>
+      {% elif course.student_count >= course.capacity %}
+        <div>This course has reached max capacity.</div>
+      {% elif not has_completed_dependencies %}
+        <div>You must complete dependencies first.</div>
       {% else %}
         <div>You can enroll in this course.</div>
         <form action="{{ url_for('.course_enroll', id=course.pk) }}">

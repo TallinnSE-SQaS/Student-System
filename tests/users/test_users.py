@@ -21,7 +21,7 @@ class TestUsers(unittest.TestCase):
         test_client.post('/users/login', data=credentials, follow_redirects=True)  # login first
 
         response = test_client.get('/courses/1')
-        self.assertIn(b'Student count: 20', response.data)
+        self.assertIn(b'Student count: 0', response.data)
         self.assertIn(b'You can enroll in this course.', response.data)
 
         response = test_client.post('/courses/1/enroll', follow_redirects=True)
@@ -29,5 +29,5 @@ class TestUsers(unittest.TestCase):
         self.assertIn(b'Basic Course', response.data)
 
         response = test_client.get('/courses/1')
-        self.assertIn(b'Student count: 21', response.data)
+        self.assertIn(b'Student count: 1', response.data)
         self.assertIn(b'You are enrolled in this course.', response.data)

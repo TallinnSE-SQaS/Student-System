@@ -7,9 +7,9 @@ database_data = {
     User: [{"username": "student", "role": 0, "password": "some-password"},
            {"username": "professor", "role": 1, "password": "some-other-password"}],
 
-    Course: [{"name": "Basic Course", "professor": 1, "capacity": 30, "student_count": 20},
-             {"name": "Basic Course, filled out", "professor": 1, "capacity": 30, "student_count": 30},
-             {"name": "Advanced Course", "professor": 1, "capacity": 30, "student_count": 20}],
+    Course: [{"name": "Basic Course", "professor": 1, "capacity": 30},
+             {"name": "Basic Course, filled out", "professor": 1, "capacity": 30},
+             {"name": "Advanced Course", "professor": 1, "capacity": 30}],
 
     CourseDependency: [{"dependant": 3, "dependee": 1}],
 

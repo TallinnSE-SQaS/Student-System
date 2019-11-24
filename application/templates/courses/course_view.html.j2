@@ -16,14 +16,14 @@
         <div>You are enrolled in this course.</div>
       {% elif course.student_count >= course.capacity %}
         <div>This course has reached max capacity.</div>
-      {% elif not has_completed_dependencies %}
-        <div>You must complete dependencies first.</div>
+      {% elif pending_dependencies %}
+        <div>You must complete dependencies first: {{ ', '.join(pending_dependencies) }}</div>
       {% else %}
         <div>You can enroll in this course.</div>
-        <form action="{{ url_for('.course_enroll', id=course.pk) }}">
-          <button class="btn btn-primary" type="submit">Enroll</button>
-        </form>
       {% endif %}
+      <form action="{{ url_for('.course_enroll', id=course.pk) }}" method="POST">
+        <button class="btn btn-primary" id="enroll" type="submit">Enroll</button>
+      </form>
     {% else %}
       <div>Login to enroll in this course.</div>
     {% endif %}

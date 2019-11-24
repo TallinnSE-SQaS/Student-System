@@ -1,3 +1,5 @@
+from selenium.webdriver.chrome.webdriver import WebDriver
+
 from application.users.models import User, Role
 from application.courses.models import Course, CourseDependency, CourseEnrollment
 
@@ -21,13 +23,18 @@ def before_scenario(context, scenario):
 
     CourseEnrollment.bulk_create([
         CourseEnrollment(student_id=1, course=1),
-        CourseEnrollment(student_id=2, course=1),
+        CourseEnrollment(student_id=3, course=1),
         CourseEnrollment(student_id=1, course=2),
         CourseEnrollment(student_id=2, course=3),
     ])
+
+    context.browser = WebDriver()
+    context.browser.get('http://localhost:5000')
 
 
 def after_scenario(context, scenario):
     for model in [User, CourseEnrollment, CourseDependency, Course]:
         model.drop_table()
         model.create_table()
+
+    context.browser.close()

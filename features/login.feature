@@ -18,4 +18,4 @@ Feature: Logging into the website
         When I enter my credentials into the login form
         And I submit the form
         Then I should remain on the logged-out homepage
-        And I should see an error message that reads "Invalid Credentials"
+        And I should see an error message that reads "Invalid credentials"

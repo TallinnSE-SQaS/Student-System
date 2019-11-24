@@ -35,9 +35,10 @@ def logout():
 
 
 def student_home():
-    courses_enrolled_in = CourseEnrollment.select().where(
-        CourseEnrollment.student == session['current_user']['id'])
-    return render_template('users/student_home.html.j2', courses=enumerate(courses_enrolled_in))
+    return render_template(
+        'users/student_home.html.j2',
+        courses=Course.select().join(CourseEnrollment)
+            .where(CourseEnrollment.student == session['current_user']['id']))
 
 
 def professor_home():

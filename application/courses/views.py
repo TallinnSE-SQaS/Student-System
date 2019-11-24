@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List, Set
 
 from flask import Blueprint, render_template, session, redirect, url_for, flash
 
@@ -22,7 +22,7 @@ def course_view(id):
     if course is not None:
         current_user = session.get('current_user')
         is_enrolled = False
-        has_completed_dependencies = False
+        pending_dependencies = set()
 
         if current_user is not None:
             current_user = User.get_by_id(current_user['id'])
@@ -32,12 +32,12 @@ def course_view(id):
                 .count() != 0
 
             if not is_enrolled:
-                has_completed_dependencies = cross_check_dependencies(current_user, course)
+                pending_dependencies = cross_check_dependencies(current_user, course)
 
         return render_template(
             'courses/course_view.html.j2',
             course=course, is_enrolled=is_enrolled, current_user=current_user,
-            has_completed_dependencies=has_completed_dependencies)
+            pending_dependencies=[pd.name for pd in pending_dependencies])
 
     else:
         return '', 404
@@ -50,27 +50,29 @@ def course_enroll(id):
 
     if user is None:
         flash('You must be logged in to enroll into a course.', 'error')
-        redirect(url_for('home'))
+        return redirect(url_for('home'))
 
-    if course.student_count < course.capacity:
-        enrollment = CourseEnrollment(student=user, course=course)
-        enrollment.save()
-        course.student_count += 1
-        course.save()
+    pending_dependencies = cross_check_dependencies(user, course)
+
+    if course.student_count >= course.capacity:
+        flash("This course has reached max capacity.", 'error')
+
+    elif pending_dependencies:
+        course_names: List[str] = [pd.name for pd in pending_dependencies]
+        flash(
+            "You must complete the course{} '{}' first."
+                .format('s' if len(course_names) != 1 else '',
+                        ', '.join(course_names)))
 
     else:
-        flash("You cannot enroll into this course. It has reached max capacity.", 'error')
+        enrollment = CourseEnrollment(student=user, course=course)
+        enrollment.save()
 
     return redirect(url_for('home'))
 
 
-def cross_check_dependencies(student: User, course: Course) -> bool:
-    student_courses = [ce.course for ce in student.courses]
-    dependee_courses = [cd.dependee for cd in course.dependees]
-    print(student_courses, dependee_courses)
+def cross_check_dependencies(student: User, course: Course) -> Set[Course]:
+    student_courses = set(ce.course for ce in student.courses)
+    dependee_courses = set(cd.dependee for cd in course.dependees)
 
-    if len(dependee_courses) > 0:
-        return all(dc in student_courses for dc in dependee_courses)
-
-    else:
-        return True  # no dependees -> can enroll
+    return dependee_courses - (student_courses & dependee_courses)

@@ -8,7 +8,10 @@ class Course(BaseModel):
     name = peewee.CharField()
     professor = peewee.ForeignKeyField(User, backref='courses')
     capacity = peewee.IntegerField()
-    student_count = peewee.IntegerField()
+
+    @property
+    def student_count(self):
+        return self.enrollments.count()
 
 
 Course.create_table()
